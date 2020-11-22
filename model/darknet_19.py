@@ -1,4 +1,5 @@
 from .base_model import *
+from typing import (overload)
 from .global_avg_pool2d import *
 
 
@@ -27,6 +28,7 @@ class Darknet(BaseModel):
             nn.Softmax(dim=1)
         )
 
+    @overload
     def forward(self, x):
         x = self.feature(x)
         x = self.classifier(x)
