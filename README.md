@@ -1,3 +1,14 @@
+# Modo de usar
+###### Parâmetros:
+* ```--imagesDir -id``` : Diretório raiz do dataset.
+* ```--model -m```: Modelo a ser utilizado, tendo como opções ``darknet19`` ou ``darkCovidNet``.
+* ```--epochs -e```: Quantidade de épocas a serem executadas.
+
+###### Exemplo:
+```
+  python train.py -id 'dataset' -m darknet19 -e 5
+```
+
 # Referências
 Dataset extraído de [COVID-19](https://github.com/muhammedtalo/COVID-19/tree/master/X-Ray%20Image%20DataSet).
 
