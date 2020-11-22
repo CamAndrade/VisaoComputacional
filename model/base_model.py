@@ -1,6 +1,8 @@
-import torch.nn as nn
 import logging
+from typing import (overload)
+
 import numpy as np
+import torch.nn as nn
 
 
 class BaseModel(nn.Module):
@@ -17,6 +19,7 @@ class BaseModel(nn.Module):
         self.logger.info('Parâmetros treináveis: {}'.format(params))
         self.logger.info(self)
 
+    @overload
     def __str__(self):
         model_parameters = filter(lambda p: p.requires_grad, self.parameters())
         params = sum([np.prod(p.size()) for p in model_parameters])
@@ -25,15 +28,9 @@ class BaseModel(nn.Module):
     @staticmethod
     def conv_block(in_channel, out_channel, kernel_size=3, padding=1, stride=1, bias=False):
         """
-               A maioria das camadas convolucionais desta arquitetura, contem o kernel_size por padrão 3.
-               :param in_channel:
-               :param out_channel:
-               :param kernel_size:
-               :param padding:
-               :param stride:
-               :param bias:
-               :return: retorna camada convolucional
-               """
+        A maioria das camadas convolucionais desta arquitetura, contem o kernel_size por padrão 3.
+        :return: retorna camada convolucional
+        """
         return nn.Sequential(
             nn.Conv2d(in_channel, out_channel, kernel_size=kernel_size, stride=stride, padding=padding, bias=bias),
             nn.BatchNorm2d(out_channel),
