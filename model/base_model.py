@@ -1,15 +1,17 @@
 import logging
 from typing import (overload)
+from abc import abstractmethod, ABC
 
 import numpy as np
 import torch.nn as nn
 
 
-class BaseModel(nn.Module):
+class BaseModel(nn.Module, ABC):
     def __init__(self):
         super(BaseModel, self).__init__()
         self.logger = logging.getLogger(self.__class__.__name__)
 
+    @abstractmethod
     def forward(self, *input):
         raise NotImplementedError
 

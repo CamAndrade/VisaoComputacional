@@ -1,5 +1,4 @@
 from .base_model import *
-from typing import (overload)
 
 
 class DarkCovidNet(BaseModel):
@@ -29,7 +28,6 @@ class DarkCovidNet(BaseModel):
             nn.Linear(507, 3)
         )
 
-    @overload
     def forward(self, x):
         x = self.feature(x)
         x = self.classifier(x)

@@ -10,9 +10,9 @@ import matplotlib.pyplot as plt
 
 class Dataset():
     def __init__(self, dir):
-        self.dir = dir
-        self.dataset = self.carregar_dataset()
-        self.skf = self.estratificacao()
+        self.__dir = dir
+        self.__dataset = self.carregar_dataset()
+        self.__skf = self.estratificacao()
 
     @staticmethod
     def __carregar_imagem():
@@ -27,7 +27,7 @@ class Dataset():
         )
 
     def carregar_dataset(self):
-        return torchvision.datasets.DatasetFolder(self.dir,
+        return torchvision.datasets.DatasetFolder(self.__dir,
                                                   loader=self.__carregar_imagem(),
                                                   extensions=('jpg', 'png', 'jpeg'),
                                                   transform=self.__transformacao())
@@ -51,6 +51,22 @@ class Dataset():
         grid_img = torchvision.utils.make_grid(data, nrow=nrow)
         plt.imshow(grid_img.permute(1, 2, 0))
         plt.show()
+
+    @property
+    def dataset(self):
+        return self.__dataset
+
+    @dataset.setter
+    def dataset(self, value):
+        self.__dataset = value
+
+    @property
+    def skf(self):
+        return self.__skf
+
+    @skf.setter
+    def skf(self, value):
+        self.__skf = value
 
 
 class ToNorm(object):
