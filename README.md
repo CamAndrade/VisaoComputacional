@@ -1,4 +1,5 @@
 # Referências
+Dataset extraído de [COVID-19](https://github.com/muhammedtalo/COVID-19/tree/master/X-Ray%20Image%20DataSet).
 
 ```
 @inproceedings{redmon2017yolo9000,
