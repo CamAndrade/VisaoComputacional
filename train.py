@@ -42,7 +42,7 @@ class Train:
 
             self.logger.info("Loss treino: %4.3f" % (np.mean(self.lloss)))
 
-    def __evaluate(self, dataloader_test, model, criterion):
+    def __evaluate(self, dataloader_test, model, criterion, device):
         model.to(device)
         model.eval()
 
@@ -77,7 +77,7 @@ class Train:
             self.__train(dataloader_train, model, optimizer, criterion, device)
 
             self.logger.info("------ Avaliação ------")
-            (acc, loss) = self.__evaluate(dataloader_test, model, criterion)
+            (acc, loss) = self.__evaluate(dataloader_test, model, criterion, device)
 
             self.logger.info("Accuracy:%4.3f Loss:%4.3f" % (acc, loss))
 
