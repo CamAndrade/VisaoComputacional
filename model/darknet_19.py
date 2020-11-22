@@ -1,4 +1,5 @@
 from .base_model import *
+from .global_avg_pool2d import *
 
 
 class Darknet(BaseModel):
@@ -22,7 +23,7 @@ class Darknet(BaseModel):
 
         self.classifier = nn.Sequential(
             nn.Conv2d(1024, 1000, kernel_size=1),
-            #avgpoll global
+            GlobalAvgPool2d(),
             nn.Softmax(dim=1)
         )
 
