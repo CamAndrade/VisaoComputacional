@@ -5,7 +5,7 @@ from .base_model import *
 class Darknet(BaseModel):
 
     def __init__(self):
-        self.super(Darknet, self).__init__()
+        super(Darknet, self).__init__()
 
         self.feature = nn.Sequential(
             self.conv_block(in_channel=3, out_channel=32),
@@ -22,10 +22,15 @@ class Darknet(BaseModel):
         )
 
         self.classifier = nn.Sequential(
-            self.conv_block(in_channel=1024, out_channel=1000, kernel_size=1),
-            #avg poll
+            nn.Conv2d(1024, 1000, kernel_size=1),
+            #avgpoll global
             nn.Softmax(dim=1)
         )
+
+    def forward(self, x):
+        x = self.feature(x)
+        x = self.classifier(x)
+        return x
 
     @staticmethod
     def conv_block(in_channel, out_channel, kernel_size=3, padding=1, stride=1, bias=False):
