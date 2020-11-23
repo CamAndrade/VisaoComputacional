@@ -19,11 +19,17 @@ class ModelSelector:
         metodo_model = self.switcher.get(self.__args.model, lambda: "Selecione um modelo válido.")
         self.__model = metodo_model(self)
 
+        self.__show_model()
+
     def __darknet19(self):
         return Darknet()
 
     def __darkCovidNet(self):
         return DarkCovidNet()
+
+    def __show_model(self):
+        print("-------- Modelo --------")
+        print(self.model)
 
     switcher = {
         "darknet19": __darknet19,

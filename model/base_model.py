@@ -21,7 +21,6 @@ class BaseModel(nn.Module, ABC):
         self.logger.info('Parâmetros treináveis: {}'.format(params))
         self.logger.info(self)
 
-    @overload
     def __str__(self):
         model_parameters = filter(lambda p: p.requires_grad, self.parameters())
         params = sum([np.prod(p.size()) for p in model_parameters])

@@ -50,6 +50,8 @@ class Train:
         self.lacc.clear()
 
         with torch.no_grad():
+            # correct = 0
+            # total = 0
             for x, y in tqdm(dataloader_test):
                 x = x.to(device)
                 prediction = model(x)
@@ -61,14 +63,20 @@ class Train:
                 self.lacc.append(acc)
                 self.lloss.append(loss.item())
 
+
+                # outputs = model(x)
+                # _, predicted = torch.max(outputs.data, 1)
+                # total += y.size(0)
+                # correct += (predicted == y).sum().item()
+
         return np.mean(self.lacc), np.mean(self.lloss)
 
-    def __train_model(self, ds_object, device, model):
+    def __train_model(self, ds_object, device, model, learning_rate=3e-3):
+        criterion = nn.CrossEntropyLoss()
+        optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+
         for train, test in ds_object.skf.split(range(len(ds_object.dataset)), ds_object.dataset.targets):
             ds_train, ds_test = ds_object.treino_teste(ds_object.dataset, (train, test))
-
-            criterion = nn.CrossEntropyLoss()
-            optimizer = optim.Adam(model.parameters(), lr=3e-3)
 
             dataloader_train = torch.utils.data.DataLoader(ds_train, batch_size=32)
             dataloader_test = torch.utils.data.DataLoader(ds_test, batch_size=32)
@@ -116,4 +124,4 @@ if __name__ == '__main__':
     device = DeviceSelector()
     dataset_object = Dataset(model.imagesDir)
 
-    train = Train(dataset_object, device.device, model.model, model.epochs)
+    Train(dataset_object, device.device, model.model, model.epochs)

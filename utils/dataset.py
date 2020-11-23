@@ -27,6 +27,14 @@ class Dataset():
         )
 
     def carregar_dataset(self):
+        """
+        testloader = torch.utils.data.DataLoader(dataset,
+                                            batch_size=8,
+                                            shuffle=False,
+                                            num_workers=2)
+
+        :return:
+        """
         return torchvision.datasets.DatasetFolder(self.__dir,
                                                   loader=self.__carregar_imagem(),
                                                   extensions=('jpg', 'png', 'jpeg'),
