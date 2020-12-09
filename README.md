@@ -3,10 +3,12 @@
 * ```--imagesDir -id``` : Diretório raiz do dataset.
 * ```--model -m```: Modelo a ser utilizado, tendo como opções ``darknet19`` ou ``darkCovidNet``.
 * ```--epochs -e```: Quantidade de épocas a serem executadas.
+* ```--pth_path -pth```: Diretório para salvar os modelos treinados.
+* ```--log_path -log```: Diretório para salvar os logs.
 
 ###### Exemplo:
 ```
-  python train.py -id 'dataset' -m darknet19 -e 5
+  python train.py -id 'dataset' -m darknet19 -e 5 -pth ./trained_models -log ./logs
 ```
 
 # Referências

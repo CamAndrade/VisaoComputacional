@@ -12,6 +12,7 @@ class Dataset():
     def __init__(self, dir):
         self.__dir = dir
         self.__dataset = self.carregar_dataset()
+        self.__classes = self.__dataset.class_to_idx
         self.__skf = self.estratificacao()
 
     @staticmethod
@@ -23,7 +24,7 @@ class Dataset():
         return transforms.Compose(
             [transforms.Resize((256, 256)),
              transforms.ToTensor(),
-             ToNorm()]
+             ]
         )
 
     def carregar_dataset(self):
@@ -50,7 +51,7 @@ class Dataset():
         https://xzz201920.medium.com/stratifiedkfold-v-s-kfold-v-s-stratifiedshufflesplit-ffcae5bfdf
         :return: O artigo indica a avaliação com 5 folds para ambos os problemas (classificação binária e tripla)
         """
-        return StratifiedKFold(n_splits=5)
+        return StratifiedKFold(n_splits=5, shuffle=True, random_state=3)
 
     @staticmethod
     def show(dataset, batch_size=32, nrow=5):
@@ -59,6 +60,10 @@ class Dataset():
         grid_img = torchvision.utils.make_grid(data, nrow=nrow)
         plt.imshow(grid_img.permute(1, 2, 0))
         plt.show()
+
+    @property
+    def classes(self):
+        return self.__classes
 
     @property
     def dataset(self):
@@ -75,10 +80,3 @@ class Dataset():
     @skf.setter
     def skf(self, value):
         self.__skf = value
-
-
-class ToNorm(object):
-    def __call__(self, imagem):
-        media = torch.mean(imagem)
-        desvio_padrao = torch.std(imagem)
-        return (imagem - media) / desvio_padrao
