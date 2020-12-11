@@ -10,9 +10,12 @@
 ```
   python train.py -id 'dataset' -m darknet19 -e 5 -pth ./trained_models -log ./logs
 ```
+# Artefatos
+* Relatório disponível em: [Relatório.pdf](https://github.com/CamAndrade/visao-computacional/blob/master/Relat%C3%B3rio.pdf)
+* Vídeo disponível em: [Apresentação](https://www.youtube.com/watch?v=catqMgMjcFY&feature=youtu.be)
 
 # Referências
-Dataset extraído de [COVID-19](https://github.com/muhammedtalo/COVID-19/tree/master/X-Ray%20Image%20DataSet).
+* Dataset extraído de [COVID-19](https://github.com/muhammedtalo/COVID-19/tree/master/X-Ray%20Image%20DataSet).
 
 ```
 @inproceedings{redmon2017yolo9000,
